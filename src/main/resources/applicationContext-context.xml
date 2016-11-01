@@ -18,9 +18,7 @@
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-
 		<property value="classpath:config.properties" name="location" />
-
 	</bean>
 
 
