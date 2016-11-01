@@ -13,81 +13,78 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd ">
 
-		<context:component-scan base-package="com.cdsxt" />
+	<context:component-scan base-package="com.snoopy" />
 
 
-		<bean
-			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 
-			<property value="classpath:config.properties" name="location" />
+		<property value="classpath:config.properties" name="location" />
 
-		</bean>
-
-
-		<bean class="com.alibaba.druid.pool.DruidDataSource"
-			destroy-method="close" init-method="init" id="dataSource">
-
-			<!-- 基本属性 url、user、password -->
+	</bean>
 
 
-			<property value="jdbc:oracle:thin:@localhost:1521:orcl"
-				name="url" />
+	<bean class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close" init-method="init" id="dataSource">
 
-			<property value="scott" name="username" />
+		<!-- 基本属性 url、user、password -->
+		<property value="jdbc:oracle:thin:@localhost:1521:orcl" name="url" />
 
-			<property value="123456" name="password" />
+		<property value="scott" name="username" />
 
-			<!-- 配置初始化大小、最小、最大 -->
+		<property value="123456" name="password" />
 
-
-			<property value="1" name="initialSize" />
-
-			<property value="1" name="minIdle" />
-
-			<property value="20" name="maxActive" />
-
-			<!-- 配置获取连接等待超时的时间 -->
+		<!-- 配置初始化大小、最小、最大 -->
 
 
-			<property value="60000" name="maxWait" />
+		<property value="1" name="initialSize" />
 
-			<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property value="1" name="minIdle" />
 
+		<property value="20" name="maxActive" />
 
-			<property value="60000" name="timeBetweenEvictionRunsMillis" />
-
-			<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-
-
-			<property value="300000" name="minEvictableIdleTimeMillis" />
-
-			<property value="SELECT 1 FROM DUAL" name="validationQuery" />
-
-			<property value="true" name="testWhileIdle" />
-
-			<property value="false" name="testOnBorrow" />
-
-			<property value="false" name="testOnReturn" />
-
-			<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<!-- 配置获取连接等待超时的时间 -->
 
 
-			<property value="true" name="poolPreparedStatements" />
+		<property value="60000" name="maxWait" />
 
-			<property value="20" name="maxPoolPreparedStatementPerConnectionSize" />
-
-			<!-- 配置监控统计拦截的filters -->
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
 
 
-			<property value="stat" name="filters" />
+		<property value="60000" name="timeBetweenEvictionRunsMillis" />
 
-		</bean>
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 
 
-		<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+		<property value="300000" name="minEvictableIdleTimeMillis" />
 
-			<property name="dataSource" ref="dataSource" />
+		<property value="SELECT 1 FROM DUAL" name="validationQuery" />
 
-		</bean>
+		<property value="true" name="testWhileIdle" />
+
+		<property value="false" name="testOnBorrow" />
+
+		<property value="false" name="testOnReturn" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+
+
+		<property value="true" name="poolPreparedStatements" />
+
+		<property value="20" name="maxPoolPreparedStatementPerConnectionSize" />
+
+		<!-- 配置监控统计拦截的filters -->
+
+
+		<property value="stat" name="filters" />
+
+	</bean>
+
+
+	<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+
+		<property name="dataSource" ref="dataSource" />
+
+	</bean>
 
 </beans>
