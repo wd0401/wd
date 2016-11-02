@@ -16,9 +16,10 @@
 	<context:component-scan base-package="com.snoopy" />
 
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property value="classpath:config.properties" name="location" />
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:config.properties</value>
+		</property>
 	</bean>
 
 
@@ -26,11 +27,11 @@
 		destroy-method="close" init-method="init" id="dataSource">
 
 		<!-- 基本属性 url、user、password -->
-		<property value="jdbc:oracle:thin:@localhost:1521:orcl" name="url" />
+		<property value="jdbc:oracle:thin:@localhost:1521:XE" name="url" />
 
-		<property value="scott" name="username" />
+		<property value="elvis" name="username" />
 
-		<property value="123456" name="password" />
+		<property value="elvis" name="password" />
 
 		<!-- 配置初始化大小、最小、最大 -->
 
