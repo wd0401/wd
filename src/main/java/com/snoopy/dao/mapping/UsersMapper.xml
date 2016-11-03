@@ -14,6 +14,13 @@
 	<!-- 多个参数的时候 需要用 下标参数 从0开始 -->
 	<select id="findInfo" resultType="Users">
 		select * from users u
-		where u.user_name=#{0} and u.user_password=#{password}
+		where
+		u.user_name=#{0} and u.user_password=#{password}
 	</select>
+	<insert id="save" parameterType="Users" >
+		insert into users (id,username,password,email,gender)
+		values
+		(seq_users.nextval,	#{username}, #{password}, #{email}, #{gender})
+	</insert>
+
 </mapper>

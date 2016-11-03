@@ -12,9 +12,9 @@
 	    <base href="<%=basePath%>">
 	  	<meta charset="UTF-8">
 	    <title>用户列表</title>
-		<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-		<script type="text/javascript" src="/assets/js/jquery-1.8.3.js"></script>
-		<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+		<script type="text/javascript" src="assets/js/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	</head>
   
 	<body>

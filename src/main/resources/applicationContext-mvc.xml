@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jms="http://www.springframework.org/schema/jms"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -10,7 +12,9 @@
 		http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd ">
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms.xsd ">
 
 	<!-- 配置在DispatcherServlet中的配置文件 只会扫描@Controller标注的类 -->
 	<context:component-scan base-package="com.snoopy"></context:component-scan>
@@ -18,7 +22,7 @@
 	<!-- 自动配置 -->
 	<mvc:annotation-driven />
 
-	<mvc:resources location="/WEB-INF/assets/**" mapping="/assets/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/assets/" mapping="/assets/**" />
 
 
 	<!-- 配置视图解析器 -->
@@ -38,6 +42,24 @@
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+	<!-- =============================================== -->
+	<!-- JMS Template -->
+	<!-- =============================================== -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<property name="defaultDestination" ref="jmsDestination" />
+		<property name="messageConverter">
+			<bean
+				class="org.springframework.jms.support.converter.SimpleMessageConverter" />
+		</property>
+	</bean>
+	<!-- Pooled Spring connection factory -->
+	<bean id="cachingConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="jmsConnectionFactory" />
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
